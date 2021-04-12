@@ -23,20 +23,68 @@
                 <a class="view" id="juegos" href="#">Juegos</a>
             </ul>
         </nav>
-
     </section>
 
-    <section class="c1">
+    <section>
+        <table id="tabla">
+            <tr>
+                <td>Titulo</td>
+                <td>Categoria</td>
+                <td>Descripcion</td>
+                <td>Detalle</td>
+                <td>Fecha/td>
+            </tr>
+        </table>
+    </section>
 
-        <article class="art_img">
-            <img  class="img_c1" src="../img/a1.png">
-        </article>
+    <section><button  id="boton">Todas las Noticias</button></section>
 
+    <script type="text/javascript">
 
+    function cargarTabla(json){
+        var url = "http://demo6497253.mockable.io/noticias";
+    
+        fetch  (url)
+            .then(response => response.json())
+            .then(data => generarTabla(data))
+        .catch(error => {});
+    
+        }
+    
+    
+    function generarTabla(json){
+    
+        const tabla = document.getElementById("tabla");
+    
+        json.cartas.forEach ( noticia => {
+    
+        const tr = document.createElement('tr');
+
+        const tdTitulo = document.createElement('td');
+             tdTitulo.textContent = noticia.titulo;
+             tr.appendChild(tdTitulo);
+
+             const tdCategoria = document.createElement('td');
+             tdCategoria.textContent = noticia.categoria;
+             tr.appendChild(tdCategoria);
+
+             const tdDescripcion = document.createElement('td');
+             tdDescripcion.textContent = noticia.descripcion;
+             tr.appendChild(tdDescripcion);
+
+             const tdFecha = document.createElement('td');
+             tdFecha.textContent =  noticia.fecha;
+             tr.appendChild(tdFecha);
+             
+             tabla.tBodies[0].appendChild(tr);
+         });
         
-        <button>Todas las Noticias</button>
+    }
 
-    </section>
+    document.getElementById("boton").onclick = cargarTabla;
+
+    </script>
+
 
     <footer class="footer">
         <div class="footer_enl">
